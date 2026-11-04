@@ -136,6 +136,17 @@ status = pathlib.Path('/proc/self/status').read_text()
 assert 'NoNewPrivs:\\t1' in status
 assert 'CapEff:\\t0000000000000000' in status
 assert 'Seccomp:\\t2' in status
+cg = pathlib.Path('/sys/fs/cgroup')
+if (cg / 'memory.max').exists():
+    assert (cg / 'memory.max').read_text().strip() == '536870912'
+    assert (cg / 'pids.max').read_text().strip() == '32'
+    quota, period = (cg / 'cpu.max').read_text().split()
+else:
+    assert (cg / 'memory/memory.limit_in_bytes').read_text().strip() == '536870912'
+    assert (cg / 'pids/pids.max').read_text().strip() == '32'
+    quota = (cg / 'cpu/cpu.cfs_quota_us').read_text().strip()
+    period = (cg / 'cpu/cpu.cfs_period_us').read_text().strip()
+assert int(quota) == int(period)
 for entry in lock['scoring_core_files']:
     path = pathlib.Path(importlib.util.find_spec('evalplus').origin).parent.parent / entry['path']
     assert hashlib.sha256(path.read_bytes()).hexdigest() == entry['sha256']

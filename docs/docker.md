@@ -16,6 +16,6 @@ llm-eval run --test humaneval --data-dir data/humaneval --model your-model --bas
 
 固定限制包括非 root UID/GID 65534、只读根文件系统、network=none、cap-drop=ALL、no-new-privileges、默认 seccomp、1 CPU、512 MiB 内存与相同 swap 上限、32 个 PID、文件描述符与文件大小上限、64 MiB noexec/nosuid/nodev 临时目录。
 
-预检实际检查容器 UID、NoNewPrivs、CapEff、seccomp 状态、根目录写入失败、网络连接失败以及作者核心 SHA-256，预检通过后才允许模型请求。镜像 ID 和数据身份进入运行配置。候选程序只能到达该容器执行入口。
+预检实际检查容器 UID、NoNewPrivs、CapEff、seccomp 状态、根目录写入失败、网络连接失败、cgroup 内存/PID/CPU 限制以及作者核心 SHA-256，预检通过后才允许模型请求。镜像 ID 和数据身份进入运行配置。候选程序只能到达该容器执行入口。
 
 每个容器名称随机且唯一，外层超时仅停止本次创建的容器。作者内部测试时限与外层基础设施时限分开记录。环境验证状态见验收记录。
