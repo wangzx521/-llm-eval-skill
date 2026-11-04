@@ -8,6 +8,7 @@ import tempfile
 
 from .common import EvaluationError, encode, read_json, scratch_directory, validate_score
 from .upstream import adapter_for, scoring_identity
+from . import __version__
 
 
 class Scorer:
@@ -19,7 +20,9 @@ class Scorer:
 
     def identity(self):
         identity = scoring_identity(self.task)
-        identity["worker_sha256"] = __import__("hashlib").sha256(Path(__file__).with_name("worker.py").read_bytes()).hexdigest()
+        from .common import file_hash
+        identity["package_version"] = __version__
+        identity["package_sources"] = {path.name: file_hash(path) for path in sorted(Path(__file__).parent.glob("*.py"))}
         if self.task == "humaneval":
             from .sandbox import inspect_image
             identity["code_image"] = inspect_image(self.code_image)
@@ -53,7 +56,7 @@ class Scorer:
                                                stdin=subprocess.PIPE, stdout=logs, stderr=logs, env=env)
                     try:
                         process.communicate(encode(payload), timeout=self.timeout)
-                    except subprocess.TimeoutExpired:
+                    except BaseException:
                         process.terminate()
                         try:
                             process.communicate(timeout=25)

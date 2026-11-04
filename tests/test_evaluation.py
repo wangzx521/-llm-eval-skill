@@ -282,6 +282,30 @@ class MetricTests(unittest.TestCase):
         finally:
             shutil.rmtree(scorer.output)
 
+    def test_worker_interruption_stops_owned_process(self):
+        scorer = Scorer("gsm8k", Path.cwd() / ("test-worker-" + uuid.uuid4().hex))
+        actual_popen = subprocess.Popen
+        processes = []
+        def interrupted_worker(command, **kwargs):
+            process = actual_popen([sys.executable, "-c", "import time;time.sleep(10)"], **kwargs)
+            communicate = process.communicate
+            calls = [0]
+            def interrupt_once(*args, **options):
+                calls[0] += 1
+                if calls[0] == 1:
+                    raise KeyboardInterrupt
+                return communicate(*args, **options)
+            process.communicate = interrupt_once
+            processes.append(process)
+            return process
+        try:
+            with patch("llm_eval_skills.scoring.subprocess.Popen", side_effect=interrupted_worker):
+                with self.assertRaises(KeyboardInterrupt):
+                    scorer(item(), {"text": "5", "answer_state": "ok"})
+            self.assertIsNotNone(processes[0].poll())
+        finally:
+            shutil.rmtree(scorer.output)
+
 
 if __name__ == "__main__":
     unittest.main()
