@@ -1,0 +1,69 @@
+{
+  "commit": "26d6d00bb1fd0fa37f39c99d5290da67891d1c5e",
+  "scoring_core_files": [
+    {
+      "path": "evalplus/__init__.py",
+      "bytes": 120,
+      "sha256": "fd8bd103579e95d9a9114272caf122360d6957c5ee4d67dc047884fefe0c48c2",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/__init__.py"
+    },
+    {
+      "path": "evalplus/config.py",
+      "bytes": 292,
+      "sha256": "d27099cc275ae6e64fb2c440643fc3b5d0952d1633db646e206b538517ffe6f2",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/config.py"
+    },
+    {
+      "path": "evalplus/eval/__init__.py",
+      "bytes": 10651,
+      "sha256": "3c833c39b842e33f251c83db4347e0a95191909f23b390c12d73ab29a28a4daf",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/eval/__init__.py"
+    },
+    {
+      "path": "evalplus/eval/_special_oracle.py",
+      "bytes": 1900,
+      "sha256": "92b126b907ee493121b55de06f6a34058b6e18adc8cf1c48737eedcd83f24cdd",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/eval/_special_oracle.py"
+    },
+    {
+      "path": "evalplus/eval/utils.py",
+      "bytes": 5467,
+      "sha256": "5bf8925c8dd7c8f06b05c0ff4f28672e8e3b61d1b567b6a86b90e80bd8b780a4",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/eval/utils.py"
+    },
+    {
+      "path": "evalplus/gen/__init__.py",
+      "bytes": 753,
+      "sha256": "7952440f3bd47b4f97f628b3d529dab58e57c42766f9e0594b4d4ccf55882dbb",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/gen/__init__.py"
+    },
+    {
+      "path": "evalplus/gen/util/__init__.py",
+      "bytes": 953,
+      "sha256": "81a7f0ee32dda4b5794f9645cc1199dc4b5ad8f187c6bd36fca32892ac2b8eef",
+      "url": "https://raw.githubusercontent.com/evalplus/evalplus/26d6d00bb1fd0fa37f39c99d5290da67891d1c5e/evalplus/gen/util/__init__.py"
+    }
+  ],
+  "dataset": {
+    "release_id": 153736697,
+    "tag": "v0.1.10",
+    "asset_id": 165460216,
+    "url": "https://github.com/evalplus/humanevalplus_release/releases/download/v0.1.10/HumanEvalPlus.jsonl.gz",
+    "gzip_bytes": 925932,
+    "gzip_sha256": "272720b90ac375502c8ed23cd791c2a93dfb22a911641a494da74a426c09f101",
+    "jsonl_bytes": 7714666,
+    "jsonl_sha256": "42526ec0e7d5f3ee0b06d6ced98f8c8bae3d76519151bfb3d36f79010645bd7f",
+    "count": 164,
+    "fields": [
+      "atol",
+      "base_input",
+      "canonical_solution",
+      "contract",
+      "entry_point",
+      "plus_input",
+      "prompt",
+      "task_id",
+      "test"
+    ]
+  }
+}

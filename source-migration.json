@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-04",
+  "source_profile": "P4-A archived authored orchestration",
+  "files": [
+    {
+      "path": "p4_runner.py",
+      "sha256": "5d8e024eba3ed0cecd79cd2ad1c2ef9807762357c05ee1515c188cb4c00d4ab7",
+      "bytes": 38996
+    },
+    {
+      "path": "p4_score.py",
+      "sha256": "d278ecace09e9fce72e24e71e3784513e7f7401dbd824fbff96229a154be1a18",
+      "bytes": 17809
+    },
+    {
+      "path": "p4_aggregate.py",
+      "sha256": "d23032430bffa7cfee0ec1f1799184de6b6b9ce4ff4f3b7fbfdb5933979c5eea",
+      "bytes": 25361
+    },
+    {
+      "path": "p4_common.py",
+      "sha256": "afdf5757dc770a887e99b63e7db9b14403860f487f080d58431b541e9283325e",
+      "bytes": 12784
+    },
+    {
+      "path": "vendor/protocol_guard.py",
+      "sha256": "01450b2ea638ece088354eba654815c89957bf9d6997a7a6302154e5cb944fdb",
+      "bytes": 2550
+    },
+    {
+      "path": "vendor/bounded_math_p4.py",
+      "sha256": "01cc7cb2f6022cc276a40f367b4b272f75060559805a3bfe3a972d84d32cc5b1",
+      "bytes": 2088
+    },
+    {
+      "path": "vendor/restricted_docker_backend_p4.py",
+      "sha256": "db5ddb68dbed8616a679dce7545b116b59af61a542238680ed06214ac982c6c8",
+      "bytes": 4813
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+name: Synthetic validation
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install .
+      - run: python -m unittest discover -s tests -v
+      - run: python scripts/check_release.py
+      - name: Single skill outside checkout
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/single-skill"
+          cp -R skills/eval-gsm8k "$RUNNER_TEMP/single-skill/"
+          cd "$RUNNER_TEMP/single-skill"
+          python -I eval-gsm8k/scripts/evaluate.py run --help
+  scoring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install '.[scoring]'
+      - run: python -m nltk.downloader punkt_tab
+      - name: Build locked CPU code image
+        shell: bash
+        run: |
+          docker pull python:3.12-slim-bookworm
+          BASE_IMAGE=$(docker image inspect python:3.12-slim-bookworm --format '{{index .RepoDigests 0}}')
+          BASE_DIGEST=${BASE_IMAGE#*@}
+          python scripts/build_code_image.py --base-image "python:3.12-slim-bookworm@$BASE_DIGEST" --output-dir "$RUNNER_TEMP/code-image-build"
+          echo "EVAL_CODE_IMAGE=$(cat "$RUNNER_TEMP/code-image-build/image-id.txt")" >> "$GITHUB_ENV"
+      - name: Real upstream scorers with synthetic samples
+        env:
+          EVAL_SKILLS_INTEGRATION: '1'
+        run: python -m unittest discover -s tests -v

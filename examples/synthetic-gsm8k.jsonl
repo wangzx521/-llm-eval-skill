@@ -1,0 +1,1 @@
+{"id":"synthetic-1","subset":"demo","sample":{"input":[{"role":"user","content":"A jar has two blue counters and three red counters. How many counters are there? Put the answer in \\boxed{}."}],"target":"5","metadata":{"reasoning":"Two plus three is five."}}}
