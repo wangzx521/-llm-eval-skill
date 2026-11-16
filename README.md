@@ -13,7 +13,7 @@
 
 ## 环境与共享依赖
 
-Python 3.10+。完整评分建议使用 Linux Python 3.12。先创建独立虚拟环境，再安装固定仓库版本的共享包。首次发布后可将下面的 `<commit>` 替换为交付的提交 SHA。
+需要 Python 3.10 或更高版本，完整评分建议使用 Linux Python 3.12。先创建独立虚拟环境，再运行下面的命令安装共享包。命令已指定固定的代码版本，便于复现相同的评测流程。
 
 ```bash
 python -m venv .venv
@@ -21,7 +21,7 @@ python -m venv .venv
 source .venv/bin/activate
 # Windows PowerShell
 # .venv\Scripts\Activate.ps1
-python -m pip install "llm-eval-skills[scoring] @ git+https://github.com/wangzx521/-llm-eval-skill.git@<commit>"
+python -m pip install "llm-eval-skills[scoring] @ git+https://github.com/wangzx521/-llm-eval-skill.git@aa7dc79e91e24291bbbdbf0e9cb6281ad49cfcb2"
 llm-eval --help
 ```
 
